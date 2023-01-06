@@ -1,0 +1,70 @@
+<p>dinamicos works!</p>
+<h2>Template: <small>Dinámicos</small></h2>
+<hr>
+
+<form action="" [formGroup]="miFormulario" (ngSubmit)="guardar()">
+
+    <!-- Nombre -->
+    <div class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre de la persona">
+            <span *ngIf="cartelRojo('nombre')" class="text-danger">*este input tiene que ser rellenado obligatoriamente</span>
+        </div>
+
+    </div>
+
+
+        <!-- Agregar -->
+        <div class="mb-3 row">
+            <label for="" class="col-sm-3 col-form-label">Agregar</label>
+            <div class="col-sm-9">
+                <div class="input-group">
+
+                    <input [formControl]="nuevoFavorito" type="text" class="form-control" placeholder="Nombre de la persona" (keyup.enter)="agregarFavorito()">
+                    
+                    <button class="btn btn-outline-primary" type="button" (click)="agregarFavorito()">Agregar</button>
+                </div>
+                </div>
+    
+        </div>
+
+
+
+    <!-- lista de juegos favoritos -->
+    <div class="mb-3 row">
+        <label for="" class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9" formArrayName="favoritos">
+
+            <div class="input-group mb-1" *ngFor="let favorito of favoritosArr.controls; let i = index;">
+
+                <input type="text" class="form-control mb-1" [formControlName]="i">
+                
+                <button (click)="borrar(i)" class="btn btn-outline-danger">Eliminar</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    
+        <div class="row">
+            <div class="col-sm-9">
+                <button type="submit" (click)="asd()" class="btn btn-primary float-end">Guardar</button>
+            </div>
+    
+        </div>
+
+</form>
+
+
+<span>Valid</span>
+<pre>{{miFormulario.valid}}</pre>
+
+<span>Value</span>
+<pre>{{miFormulario.value | json}}</pre>
+
+<!-- <span>Persona</span>
+<pre>{{persona | json}}</pre> -->
